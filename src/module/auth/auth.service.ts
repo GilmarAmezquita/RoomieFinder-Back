@@ -17,24 +17,30 @@ export class AuthService {
     ) {}
 
     async signUp(signUpDTO : SignUpDTO): Promise<{ token : string }> {
-        const { name, email, password } = signUpDTO
-        const hashedPassword = await bcrypt.hash(password, 10)
+        const hashedPassword = await bcrypt.hash(signUpDTO.password, 10)
         const user = await this.userModel.create({
-            name,
-            email,
-            password: hashedPassword
+            name : signUpDTO.name,
+            email : signUpDTO.email,
+            password: hashedPassword,
+            phoneNumber : signUpDTO.phoneNumber,
+            routine : signUpDTO.routine,
+            cleanliness : signUpDTO.cleanliness,
+            pets : signUpDTO.pets,
+            specialNeeds : signUpDTO.specialNeeds,
+            personality : signUpDTO.personality,
+            sociability : signUpDTO.sociability,
+            noise : signUpDTO.noise
         })
         const token = this.jwtService.sign({ id: user._id })
         return { token }
     }
 
     async login(loginDTO : loginDTO): Promise<{ token : string }> {
-        const { email, password } = loginDTO
-        const user = await this.userModel.findOne({ email })
+        const user = await this.userModel.findOne({ email : loginDTO.email })
         if (!user) {
             throw new UnauthorizedException('Invalid email or password')
         }
-        const isPasswordValid = await bcrypt.compare(password, user.password)
+        const isPasswordValid = await bcrypt.compare(loginDTO.password, user.password)
         if (!isPasswordValid) {
             throw new UnauthorizedException('Invalid email or password')
         }
