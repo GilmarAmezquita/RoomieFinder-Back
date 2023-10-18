@@ -13,6 +13,30 @@ export class User {
 
     @Prop()
     password : string
+
+    @Prop(+{ unique: [true, 'Phone number already in use'] })
+    phoneNumber : string
+
+    @Prop()
+    routine : string
+
+    @Prop()
+    cleanliness : string
+
+    @Prop()
+    pets : string
+
+    @Prop()
+    specialNeeds : string
+
+    @Prop()
+    personality : string
+
+    @Prop()
+    sociability : string
+
+    @Prop()
+    noise : string
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
