@@ -14,7 +14,7 @@ import { RoomModule } from './module/room/room.module';
     }),
     MongooseModule.forRoot(process.env.DB_URI),
     AuthModule,
-    RoomModule
+    RoomModule,
   ],
   controllers: [AppController],
   providers: [AppService],
