@@ -12,7 +12,7 @@ export class SignUpDTO {
     @IsNotEmpty()
     @IsString()
     @MinLength(6)
-    readonly password : string
+    password : string
 
     @IsNotEmpty()
     @IsString()

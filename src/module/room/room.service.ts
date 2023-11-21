@@ -33,7 +33,10 @@ export class RoomService {
                     $options: "i"
                 }
             } : {};
-            const rooms = await this.roomModel.find({...title}).limit(resPerPage).skip(skip);
+            const rooms = await this.roomModel.find({...title}).populate({
+                path: 'owner',
+                select: '-password -__v -createdAt -updatedAt -_id '
+            }).limit(resPerPage).skip(skip);
             return rooms;
         } catch (error) {
             throw error;

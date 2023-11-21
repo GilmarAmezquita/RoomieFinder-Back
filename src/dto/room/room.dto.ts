@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class RoomDTO {
     @IsNotEmpty()
@@ -10,7 +10,7 @@ export class RoomDTO {
     readonly description : string
 
     @IsNotEmpty()
-    @IsString()
+    @IsNumber()
     readonly price : number
 
     @IsNotEmpty()
@@ -30,14 +30,12 @@ export class RoomDTO {
     readonly address : string
 
     @IsNotEmpty()
-    @IsString()
-    readonly partners : number[]
+    @IsNumber()
+    readonly partners : number
 
     @IsNotEmpty()
     @IsString()
-    readonly owner : number
+    readonly owner : string
 
-    @IsNotEmpty()
-    @IsString()
     readonly photos : string[]
 }

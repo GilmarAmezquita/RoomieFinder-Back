@@ -17,20 +17,8 @@ export class AuthService {
     ) {}
 
     async signUp(signUpDTO : SignUpDTO): Promise<{ token : string }> {
-        const hashedPassword = await bcrypt.hash(signUpDTO.password, 10)
-        const user = await this.userModel.create({
-            name : signUpDTO.name,
-            email : signUpDTO.email,
-            password: hashedPassword,
-            phoneNumber : signUpDTO.phoneNumber,
-            routine : signUpDTO.routine,
-            cleanliness : signUpDTO.cleanliness,
-            pets : signUpDTO.pets,
-            specialNeeds : signUpDTO.specialNeeds,
-            personality : signUpDTO.personality,
-            sociability : signUpDTO.sociability,
-            noise : signUpDTO.noise
-        })
+        signUpDTO.password = await bcrypt.hash(signUpDTO.password, 10)
+        const user = await this.userModel.create(signUpDTO)
         const token = this.jwtService.sign({ id: user._id })
         return { token }
     }
