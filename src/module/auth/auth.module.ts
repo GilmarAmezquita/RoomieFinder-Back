@@ -8,6 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { PersonalityService } from 'src/services/personality/personality.service';
 import { PersonalitySchema } from 'src/schemas/personality.schema';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
     imports: [
@@ -25,6 +26,7 @@ import { PersonalitySchema } from 'src/schemas/personality.schema';
         MongooseModule.forFeature([{ name: 'Personality', schema: PersonalitySchema }])
     ],
     controllers: [AuthController],
-    providers: [AuthService, PersonalityService]
+    providers: [AuthService, PersonalityService, JwtStrategy],
+    exports: [JwtStrategy, PassportModule]
 })
 export class AuthModule {}
