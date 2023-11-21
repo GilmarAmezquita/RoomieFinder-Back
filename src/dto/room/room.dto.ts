@@ -1,9 +1,9 @@
 import { IsNotEmpty, IsString } from "class-validator";
 
-export class roomDTO {
+export class RoomDTO {
     @IsNotEmpty()
     @IsString()
-    readonly name : string
+    readonly title : string
 
     @IsNotEmpty()
     @IsString()
@@ -39,5 +39,5 @@ export class roomDTO {
 
     @IsNotEmpty()
     @IsString()
-    readonly images : string[]
+    readonly photos : string[]
 }

@@ -6,9 +6,13 @@ import { Schema, SchemaFactory } from "@nestjs/mongoose";
 export class Room {
     title: string
     description: string
-    owner: string
     price: number
-    location: string
+    state: string
+    country: string
+    city: string
+    address: string
+    partners : number[]
+    owner: string
     photos: string[]
 }
 

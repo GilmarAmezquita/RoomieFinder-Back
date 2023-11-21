@@ -3,6 +3,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Room } from 'src/schemas/room.schema';
 
+import { Query } from 'express-serve-static-core';
+import { RoomDTO } from 'src/dto/room/room.dto';
+
 @Injectable()
 export class RoomService {
     constructor(
@@ -10,13 +13,30 @@ export class RoomService {
         private roomModel: Model<Room>
     ){}
 
-    async addRoom(room: Room): Promise<Room> {
-        const newRoom = await this.roomModel.create(room)
-        return newRoom
+    async addRoom(room: RoomDTO): Promise<Room> {
+        try {
+            const newRoom = await this.roomModel.create(room);
+            return newRoom;
+        } catch (error) {
+            throw error;
+        }
     }
 
-    async getRooms(): Promise<Room[]> {
-        const rooms = await this.roomModel.find().exec()
-        return rooms
+    async getRooms(query: Query): Promise<Room[]> {
+        try {
+            const resPerPage = 10;
+            const page = query.page || 1;
+            const skip:number = resPerPage * (+page - 1);	
+            const title = query.title ? {
+                title: {
+                    $regex: query.title,
+                    $options: "i"
+                }
+            } : {};
+            const rooms = await this.roomModel.find({...title}).limit(resPerPage).skip(skip);
+            return rooms;
+        } catch (error) {
+            throw error;
+        }
     }
 }
