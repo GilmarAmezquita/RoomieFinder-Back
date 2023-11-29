@@ -18,25 +18,16 @@ export class User {
     phoneNumber : string
 
     @Prop()
-    routine : string
+    image : string
 
     @Prop()
-    cleanliness : string
+    hobbies : string[]
 
     @Prop()
-    pets : string
+    traits : string[]
 
     @Prop()
-    specialNeeds : string
-
-    @Prop()
-    personality : string
-
-    @Prop()
-    sociability : string
-
-    @Prop()
-    noise : string
+    university : string
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
