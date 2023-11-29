@@ -23,7 +23,7 @@ export class AuthService {
         return { token }
     }
 
-    async login(loginDTO : loginDTO): Promise<{ token : string }> {
+    async login(loginDTO : loginDTO): Promise<{ token : string, user: User }> {
         const user = await this.userModel.findOne({ email : loginDTO.email })
         if (!user) {
             throw new UnauthorizedException('Invalid email or password')
@@ -33,6 +33,6 @@ export class AuthService {
             throw new UnauthorizedException('Invalid email or password')
         }
         const token = this.jwtService.sign({ id: user._id })
-        return { token }
+        return { token, user }
     }
 }
