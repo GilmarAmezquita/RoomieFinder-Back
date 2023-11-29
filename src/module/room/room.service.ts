@@ -35,9 +35,21 @@ export class RoomService {
             } : {};
             const rooms = await this.roomModel.find({...title}).populate({
                 path: 'owner',
-                select: '-password -__v -createdAt -updatedAt -_id '
+                select: '-password -__v -createdAt -updatedAt'
             }).limit(resPerPage).skip(skip);
             return rooms;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getRoom(id: string): Promise<Room> {
+        try {
+            const room = await this.roomModel.findById(id).populate({
+                path: 'owner',
+                select: '-password -__v -createdAt -updatedAt'
+            });
+            return room;
         } catch (error) {
             throw error;
         }

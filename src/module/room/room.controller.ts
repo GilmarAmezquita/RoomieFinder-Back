@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { RoomService } from './room.service';
 import { RoomDTO } from 'src/dto/room/room.dto';
 
 import { Query as ExpressQuery } from 'express-serve-static-core';
+import { Room } from 'src/schemas/room.schema';
 
 @Controller('room')
 export class RoomController {
@@ -11,12 +12,17 @@ export class RoomController {
     ) {}
 
     @Post()
-    addRoom(@Body() body: RoomDTO) {
+    async addRoom(@Body() body: RoomDTO): Promise<Room> {
         return this.roomService.addRoom(body);
     }
 
     @Get()
-    getRooms(@Query() query: ExpressQuery) {
+    async getRooms(@Query() query: ExpressQuery): Promise<Room[]> {
         return this.roomService.getRooms(query);
+    }
+
+    @Get('/:id')
+    async getRoom(@Param('id') id : string): Promise<Room> {
+        return this.roomService.getRoom(id);
     }
 }

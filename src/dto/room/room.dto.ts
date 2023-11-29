@@ -6,36 +6,32 @@ export class RoomDTO {
     readonly title : string
 
     @IsNotEmpty()
-    @IsString()
-    readonly description : string
-
-    @IsNotEmpty()
     @IsNumber()
     readonly price : number
 
     @IsNotEmpty()
     @IsString()
-    readonly state : string
+    readonly bathroom : string
 
     @IsNotEmpty()
     @IsString()
-    readonly country : string
+    readonly space : string
 
     @IsNotEmpty()
     @IsString()
-    readonly city : string
+    readonly wardrobe : string
 
     @IsNotEmpty()
     @IsString()
     readonly address : string
 
     @IsNotEmpty()
-    @IsNumber()
-    readonly partners : number
+    @IsString()
+    readonly description : string
 
     @IsNotEmpty()
     @IsString()
     readonly owner : string
 
-    readonly photos : string[]
+    readonly images : string[]
 }

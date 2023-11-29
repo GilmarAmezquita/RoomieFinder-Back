@@ -9,31 +9,28 @@ export class Room extends Document{
     title: string
 
     @Prop()
-    description: string
-    
-    @Prop()
     price: number
     
     @Prop()
-    state: string
-    
+    bathroom: string
+
     @Prop()
-    country: string
-    
+    space: string
+
     @Prop()
-    city: string
+    wardrobe: string
     
     @Prop()
     address: string
-    
+
     @Prop()
-    partners : number
-    
+    description: string
+
     @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User' })
     owner: string;
     
     @Prop()
-    photos: string[]
+    images: string[]
 }
 
 export const RoomSchema = SchemaFactory.createForClass(Room);
