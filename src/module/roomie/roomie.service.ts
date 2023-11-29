@@ -19,7 +19,7 @@ export class RoomieService {
             const skip:number = resPerPage * (+page - 1);	
             const roomies = await this.userModel.find({}).select(
                 '-password -__v -createdAt -updatedAt'
-            ).limit(resPerPage).skip(skip);
+            );
             return roomies;
         } catch (error) {
             throw error;

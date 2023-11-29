@@ -36,7 +36,7 @@ export class RoomService {
             const rooms = await this.roomModel.find({...title}).populate({
                 path: 'owner',
                 select: '-password -__v -createdAt -updatedAt'
-            }).limit(resPerPage).skip(skip);
+            });
             return rooms;
         } catch (error) {
             throw error;
