@@ -5,7 +5,7 @@ import { RoomDTO } from 'src/dto/room/room.dto';
 import { Query as ExpressQuery } from 'express-serve-static-core';
 import { Room } from 'src/schemas/room.schema';
 
-@Controller('room')
+@Controller('api/room')
 export class RoomController {
     constructor(
         private roomService: RoomService
